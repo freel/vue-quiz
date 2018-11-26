@@ -8,11 +8,12 @@ One question per page.
 npm install freel/vue-quiz
 ```
 
-## Use with Nuxt
+## Use with Vue
 ```
 <template>
   <vue-quiz
-    *param*
+    action="#"
+    // CSS props
   />
 </template>
 
@@ -27,9 +28,16 @@ export default {
 </script>
 ```
 
+## Params
+action - On sunbmit action, default "#"
+
+questions - Array of questions with answers
+
+
 ## Props
 |Name            | Type | Description
 | --- | --- | --- |
+|submitValue| String | Submit button value
 |container-class | String | CSS class names for top layout
 |question-class  | String | CSS class names for question layout
 |answers-container-class | String | CSS class names for answers layout

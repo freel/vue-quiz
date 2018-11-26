@@ -2,8 +2,8 @@
   <div>
     <form>
       <Question
-      action="#"
-      v-bind:question="question.text"
+      :action="action"
+      :question="question.text"
       :containerClass="containerClass"
       :questionClass="questionClass"
       >
@@ -20,7 +20,7 @@
         >
         </Answer>
       </Question>
-      <input :class="submitClass" type="button" @click="formSubmit" value="Ответить">
+      <input :class="submitClass" type="button" @click="formSubmit" :value="submitValue">
     </form>
   </div>
 </template>
@@ -37,7 +37,11 @@ export default {
   },
   props: {
     questions: {
-      type: Array
+      type: Array,
+      default: () => { return [
+        {text:"Vue.JS is",
+        answers:[{text:"JS framework"},{text:"PHP framework"}]}
+      ]}
     },
     containerClass: {
       type: String
@@ -63,10 +67,18 @@ export default {
     submitClass: {
       type: String
     },
+    submitValue: {
+      type: String,
+      default: "Submit"
+    },
+    action: {
+      type: String,
+      default: "#"
+    },
   },
   data () {
     return {
-        page: 1,
+        item: 0,
         answered: null,
     }
   },
@@ -75,7 +87,7 @@ export default {
       return this.questions.length
     },
     question: function() {
-      return this.questions[this.page-1]
+      return this.questions[this.item]
     },
   },
   methods: {
