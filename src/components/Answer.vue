@@ -19,7 +19,6 @@
           </div>
         </div>
     </div>
-    <pre>{{ checkedAnswers }}</pre>
   </div>
 </template>
 
@@ -59,8 +58,7 @@ export default {
     }
   },
   watch: {
-    question: function (val) {
-      console.log("eee");
+    question: function () {
       this.checkedAnswers = this.value != null ? this.value : []
     }
   }

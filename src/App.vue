@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="containerClass">
     <form>
       <Question
       :action="action"
@@ -20,9 +20,27 @@
         >
         </Answer>
       </Question>
-      <!-- <input type="button" @click="prevousItem" value="Back"> -->
-      <input v-show="isNextEnabled" :class="nextClass" type="button" @click="nextItem" :value="nextValue">
-      <input v-show="isSubmitEnabled" :class="submitClass" type="button" @click="formSubmit" :value="submitValue">
+      <input
+        type="button"
+        v-show="isPrevousShow"
+        :disabled="isPrevousDisabled"
+        @click="prevousItem"
+        :class="{buttonClass, nextClass}"
+        :value="prevousValue">
+      <input
+        type="button"
+        v-show="isSubmitShow"
+        :disabled="isSubmitDisabled"
+        @click="formSubmit"
+        :class="{buttonClass, submitClass}"
+        :value="submitValue">
+      <input
+        type="button"
+        v-show="isNextShow"
+        :disabled="isNextDisabled"
+        @click="nextItem"
+        :class="{buttonClass, nextClass}"
+        :value="nextValue">
     </form>
   </div>
 </template>
@@ -50,48 +68,82 @@ export default {
       ]}
     },
     containerClass: {
-      type: String
+      type: String,
+      default: "jumbotron"
     },
     questionClass: {
-      type: String
+      type: String,
+      default: "h5"
     },
     answerContainerClass: {
-      type: String
+      type: String,
+      default: "col-auto my-1"
     },
     answerClass: {
-      type: String
+      type: String,
+      default: "alert alert-dark"
     },
     answerControlClass: {
-      type: String
+      type: String,
+      default: "custom-control custom-checkbox mr-sm-2"
     },
     answerCheckboxClass: {
-      type: String
+      type: String,
+      default: "custom-control-input"
     },
     answerLabelClass: {
-      type: String
+      type: String,
+      default: "custom-control-label"
     },
+    // Buttons
+    buttonClass: {
+      type: String,
+      default: "btn btn-primary"
+    },
+    // Submit
     submitClass: {
-      type: String
+      type: String,
+      default: ""
     },
     submitValue: {
       type: String,
       default: "Submit"
     },
-    submitEnabled: {
+    submitShow: {
       type: Boolean,
       default: false
     },
+    submitDisabled: {
+      type: Boolean,
+      default: true
+    },
+    // Next
     nextClass: {
-      type: String
+      type: String,
+      default: ""
     },
     nextValue: {
       type: String,
       default: "Next"
     },
-    nextEnabled: {
+    nextShow: {
       type: Boolean,
-      default: false
+      default: true
     },
+    // Prevous
+    prevousClass: {
+      type: String,
+      default: ""
+    },
+    prevousValue: {
+      type: String,
+      default: "Back"
+    },
+    prevousShow: {
+      type: Boolean,
+      default: true
+    },
+    // Submit form action
     action: {
       type: String,
       default: "#"
@@ -110,19 +162,31 @@ export default {
     question: function() {
       return this.questions[this.item]
     },
-    isSubmitEnabled: function() {
-      return this.submitEnabled || (this.answered != null ? this.answered.filter(String).length : 0) == this.pages
+    isSubmitShow: function() {
+      return this.submitShow || (this.answered != null ? this.answered.filter(String).length : 0) == this.pages
     },
-    isNextEnabled: function() {
-      return this.nextEnabled || (this.answered[this.item] != null ? this.answered[this.item].filter(String).length : false)
-    }
+    isSubmitDisabled: function() {
+      return this.submitDisabled && (this.answered != null ? this.answered.filter(String).length : 0) != this.pages
+    },
+    isNextShow: function() {
+      return this.nextShow || (this.answered[this.item] != null ? this.answered[this.item].filter(String).length : false)
+    },
+    isNextDisabled: function() {
+      return this.item >= this.pages - 1
+    },
+    isPrevousShow: function() {
+      return this.prevousShow
+    },
+    isPrevousDisabled: function() {
+      return this.item <= 0
+    },
   },
   methods: {
     nextItem: function() {
-      return this.item++
+      return this.item < this.pages ? this.item++ : void 0
     },
     prevousItem: function() {
-      return this.item--
+      return this.item > 0 ? this.item-- : void 0
     },
     formSubmit: function() {
       this.$http.post(this.action, {"answers":this.answered})
