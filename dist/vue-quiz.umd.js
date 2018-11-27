@@ -921,12 +921,12 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"0f87e5ee-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/App.vue?vue&type=template&id=34b493b2&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.containerClass},[_c('form',[_c('Question',{attrs:{"action":_vm.action,"question":_vm.question.text,"containerClass":_vm.containerClass,"questionClass":_vm.questionClass}},[_c('Answer',{attrs:{"slot":"Answer","answerContainerClass":_vm.answerContainerClass,"answerClass":_vm.answerClass,"answerControlClass":_vm.answerControlClass,"answerCheckboxClass":_vm.answerCheckboxClass,"answerLabelClass":_vm.answerLabelClass,"answers":_vm.question.answers,"question":_vm.item},slot:"Answer",model:{value:(_vm.answered[_vm.item]),callback:function ($$v) {_vm.$set(_vm.answered, _vm.item, $$v)},expression:"answered[item]"}})],1),_c('input',{directives:[{name:"show",rawName:"v-show",value:(_vm.isPrevousShow),expression:"isPrevousShow"}],class:{buttonClass: _vm.buttonClass, nextClass: _vm.nextClass},attrs:{"type":"button","disabled":_vm.isPrevousDisabled,"value":_vm.prevousValue},on:{"click":_vm.prevousItem}}),_c('input',{directives:[{name:"show",rawName:"v-show",value:(_vm.isSubmitShow),expression:"isSubmitShow"}],class:{buttonClass: _vm.buttonClass, submitClass: _vm.submitClass},attrs:{"type":"button","disabled":_vm.isSubmitDisabled,"value":_vm.submitValue},on:{"click":_vm.formSubmit}}),_c('input',{directives:[{name:"show",rawName:"v-show",value:(_vm.isNextShow),expression:"isNextShow"}],class:{buttonClass: _vm.buttonClass, nextClass: _vm.nextClass},attrs:{"type":"button","disabled":_vm.isNextDisabled,"value":_vm.nextValue},on:{"click":_vm.nextItem}})],1)])}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"0f87e5ee-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/App.vue?vue&type=template&id=325ef135&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.containerClass},[_c('form',[_c('Question',{attrs:{"action":_vm.action,"question":_vm.question.text,"containerClass":_vm.containerClass,"questionClass":_vm.questionClass}},[_c('Answer',{attrs:{"slot":"Answer","answerContainerClass":_vm.answerContainerClass,"answerClass":_vm.answerClass,"answerControlClass":_vm.answerControlClass,"answerCheckboxClass":_vm.answerCheckboxClass,"answerLabelClass":_vm.answerLabelClass,"answers":_vm.question.answers,"question":_vm.item},slot:"Answer",model:{value:(_vm.answered[_vm.item]),callback:function ($$v) {_vm.$set(_vm.answered, _vm.item, $$v)},expression:"answered[item]"}})],1),_c('input',{directives:[{name:"show",rawName:"v-show",value:(_vm.isPrevousShow),expression:"isPrevousShow"}],class:[_vm.buttonClass, _vm.nextClass],attrs:{"type":"button","disabled":_vm.isPrevousDisabled,"value":_vm.prevousValue},on:{"click":_vm.prevousItem}}),_c('input',{directives:[{name:"show",rawName:"v-show",value:(_vm.isSubmitShow),expression:"isSubmitShow"}],class:[_vm.buttonClass, _vm.submitClass],attrs:{"type":"button","disabled":_vm.isSubmitDisabled,"value":_vm.submitValue},on:{"click":_vm.formSubmit}}),_c('input',{directives:[{name:"show",rawName:"v-show",value:(_vm.isNextShow),expression:"isNextShow"}],class:[_vm.buttonClass, _vm.nextClass],attrs:{"type":"button","disabled":_vm.isNextDisabled,"value":_vm.nextValue},on:{"click":_vm.nextItem}})],1)])}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/App.vue?vue&type=template&id=34b493b2&
+// CONCATENATED MODULE: ./src/App.vue?vue&type=template&id=325ef135&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"0f87e5ee-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Question.vue?vue&type=template&id=a11efd6a&
 var Questionvue_type_template_id_a11efd6a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('keep-alive',[_c('div',[_c('span',{class:_vm.questionClass},[_vm._v(_vm._s(_vm.question))]),_vm._t("Answer")],2)])}
@@ -1249,7 +1249,8 @@ Answer_component.options.__file = "Answer.vue"
         return [{
           text: "Vue.JS is",
           answers: [{
-            text: "JS framework"
+            text: "JS framework",
+            right: right
           }, {
             text: "PHP framework"
           }, {
@@ -1258,18 +1259,19 @@ Answer_component.options.__file = "Answer.vue"
         }, {
           text: "This is second question?",
           answers: [{
-            text: "Yes"
-          }, {
             text: "No"
           }, {
             text: "Both"
+          }, {
+            text: " Yes",
+            right: right
           }]
         }, {
           text: "This is third question?",
           answers: [{
-            text: "Yes!"
-          }, {
             text: "No!"
+          }, {
+            text: "Yes!"
           }, {
             text: "Both?"
           }]

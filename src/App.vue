@@ -25,21 +25,21 @@
         v-show="isPrevousShow"
         :disabled="isPrevousDisabled"
         @click="prevousItem"
-        :class="{buttonClass, nextClass}"
+        :class="[buttonClass, nextClass]"
         :value="prevousValue">
       <input
         type="button"
         v-show="isSubmitShow"
         :disabled="isSubmitDisabled"
         @click="formSubmit"
-        :class="{buttonClass, submitClass}"
+        :class="[buttonClass, submitClass]"
         :value="submitValue">
       <input
         type="button"
         v-show="isNextShow"
         :disabled="isNextDisabled"
         @click="nextItem"
-        :class="{buttonClass, nextClass}"
+        :class="[buttonClass, nextClass]"
         :value="nextValue">
     </form>
   </div>
@@ -60,11 +60,11 @@ export default {
       type: Array,
       default: () => { return [
         {text:"Vue.JS is",
-        answers:[{text:"JS framework"},{text:"PHP framework"},{text:"Something from space"}]},
+        answers:[{text: "JS framework", right}, {text: "PHP framework"}, {text: "Something from space"}]},
         {text:"This is second question?",
-        answers:[{text:"Yes"},{text:"No"},{text:"Both"}]},
+        answers:[{text: "No"}, {text: "Both"}, {text:" Yes", right}]},
         {text:"This is third question?",
-        answers:[{text:"Yes!"},{text:"No!"},{text:"Both?"}]},
+        answers:[{text: "No!"}, {text: "Yes!"}, {text: "Both?"}]},
       ]}
     },
     containerClass: {
