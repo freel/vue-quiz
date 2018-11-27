@@ -60,9 +60,9 @@ export default {
       type: Array,
       default: () => { return [
         {text:"Vue.JS is",
-        answers:[{text: "JS framework", right}, {text: "PHP framework"}, {text: "Something from space"}]},
+        answers:[{text: "JS framework"}, {text: "PHP framework"}, {text: "Something from space"}]},
         {text:"This is second question?",
-        answers:[{text: "No"}, {text: "Both"}, {text:" Yes", right}]},
+        answers:[{text: "No"}, {text: "Both"}, {text:" Yes"}]},
         {text:"This is third question?",
         answers:[{text: "No!"}, {text: "Yes!"}, {text: "Both?"}]},
       ]}
