@@ -1,71 +1,91 @@
 <template>
   <div :class="containerClass">
-    <form>
-      <Question
-      :action="action"
-      :question="question.text"
-      :containerClass="containerClass"
-      :questionClass="questionClass"
+    <quiz-question
+    :action="action"
+    :question="question.text"
+    :containerClass="containerClass"
+    :questionClass="questionClass"
+    >
+      <quiz-answer
+        slot="Answer"
+        v-model="answered[item]"
+        :answerContainerClass="answerContainerClass"
+        :answerClass="answerClass"
+        :answerControlClass="answerControlClass"
+        :answerCheckboxClass="answerCheckboxClass"
+        :answerLabelClass="answerLabelClass"
+        :answers="question.answers"
+        :question="item"
       >
-        <Answer
-          slot="Answer"
-          v-model="answered[item]"
-          :answerContainerClass="answerContainerClass"
-          :answerClass="answerClass"
-          :answerControlClass="answerControlClass"
-          :answerCheckboxClass="answerCheckboxClass"
-          :answerLabelClass="answerLabelClass"
-          :answers="question.answers"
-          :question="item"
-        >
-        </Answer>
-      </Question>
-      <input
-        type="button"
-        v-show="isPrevousShow"
-        :disabled="isPrevousDisabled"
-        @click="prevousItem"
-        :class="[buttonClass, nextClass]"
-        :value="prevousValue">
-      <input
-        type="button"
-        v-show="isSubmitShow"
-        :disabled="isSubmitDisabled"
-        @click="formSubmit"
-        :class="[buttonClass, submitClass]"
-        :value="submitValue">
-      <input
-        type="button"
-        v-show="isNextShow"
-        :disabled="isNextDisabled"
-        @click="nextItem"
-        :class="[buttonClass, nextClass]"
-        :value="nextValue">
-    </form>
+    </quiz-answer>
+    </quiz-question>
+    <quiz-nav
+      @prevous="prevousItem"
+      @next="nextItem"
+      @submit="formSubmit"
+      :pages_count="pages_count"
+      :page="item"
+      :completed="completed"
+      :completed_question="completed_question"
+      :buttonClass="buttonClass"
+      :submitClass="submitClass"
+      :submitValue="submitValue"
+      :submitShow="submitShow"
+      :submitDisabled="submitDisabled"
+      :nextClass="nextClass"
+      :nextValue="nextValue"
+      :nextShow="nextShow"
+      :prevousClass="prevousClass"
+      :prevousValue="prevousValue"
+      :prevousShow="prevousShow"
+    >
+    </quiz-nav>
   </div>
 </template>
 
 <script>
-import Question from './components/Question.vue'
-import Answer from './components/Answer.vue'
+import QuizQuestion from "./components/Question.vue";
+import QuizAnswer from "./components/Answer.vue";
+import QuizNav from "./components/Nav.vue";
 
 export default {
-  name: 'vue-quiz',
+  name: "vue-quiz",
   components: {
-    Question,
-    Answer
+    QuizQuestion,
+    QuizAnswer,
+    QuizNav
   },
   props: {
     questions: {
       type: Array,
-      default: () => { return [
-        {text:"Vue.JS is",
-        answers:[{text: "JS framework", right}, {text: "PHP framework"}, {text: "Something from space"}]},
-        {text:"This is second question?",
-        answers:[{text: "No"}, {text: "Both"}, {text:" Yes", right}]},
-        {text:"This is third question?",
-        answers:[{text: "No!"}, {text: "Yes!"}, {text: "Both?"}]},
-      ]}
+      default: () => {
+        return [
+          {
+            text: "Vue.JS is",
+            answers: [
+              { text: "JS framework", right: true },
+              { text: "PHP framework" },
+              { text: "Something from space" }
+            ]
+          },
+          {
+            text: "This is second question?",
+            answers: [
+              { text: "No" },
+              { text: "Both" },
+              { text: " Yes", right: true }
+            ]
+          },
+          {
+            text: "This is third question?",
+            answers: [
+              { text: "No!" },
+              { text: "Yes!", right: true },
+              { text: "Both?" }
+            ]
+          }
+        ];
+      }
     },
     containerClass: {
       type: String,
@@ -147,53 +167,41 @@ export default {
     action: {
       type: String,
       default: "#"
-    },
-  },
-  data () {
-    return {
-        item: 0,
-        answered: [],
     }
   },
+  data() {
+    return {
+      item: 0,
+      answered: []
+    };
+  },
   computed: {
-    pages: function() {
-      return this.questions.length
+    pages_count: function() {
+      return this.questions.length;
     },
     question: function() {
-      return this.questions[this.item]
+      return this.questions[this.item];
     },
-    isSubmitShow: function() {
-      return this.submitShow || (this.answered != null ? this.answered.filter(String).length : 0) == this.pages
+    completed: function() {
+      return this.answered != null ? this.answered.filter(String).length : 0;
     },
-    isSubmitDisabled: function() {
-      return this.submitDisabled && (this.answered != null ? this.answered.filter(String).length : 0) != this.pages
-    },
-    isNextShow: function() {
-      return this.nextShow || (this.answered[this.item] != null ? this.answered[this.item].filter(String).length : false)
-    },
-    isNextDisabled: function() {
-      return this.item >= this.pages - 1
-    },
-    isPrevousShow: function() {
-      return this.prevousShow
-    },
-    isPrevousDisabled: function() {
-      return this.item <= 0
-    },
+    completed_question: function() {
+      return this.answered[this.item] != null
+        ? this.answered[this.item].filter(String).length
+        : false;
+    }
   },
   methods: {
     nextItem: function() {
-      return this.item < this.pages ? this.item++ : void 0
+      return this.item < this.pages_count ? this.item++ : void 0;
     },
     prevousItem: function() {
-      return this.item > 0 ? this.item-- : void 0
+      return this.item > 0 ? this.item-- : void 0;
     },
     formSubmit: function() {
-      this.$http.post(this.action, {"answers":this.answered})
-      .then((response) => {
-        document.write(response.body)
-      })
-    },
+      // TODO: return JSON values
+      this.$emit("complete", this.answered);
+    }
   }
-}
+};
 </script>

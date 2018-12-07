@@ -12,23 +12,14 @@
 
 <script>
 export default {
-  name: "Question",
-  props: {
-    question:{
-      type: String
-    },
-    startPage:{
-      type: Number,
-      default: 0,
-    },
-    action:{},
-    timer:{},
-    containerClass: {
-      type: String
-    },
-    questionClass: {
-      type: String
-    }
-  },
-}
+  name: "QuizQuestion",
+  props: [
+    "question",
+    "startPage",
+    "action",
+    "timer",
+    "containerClass",
+    "questionClass"
+  ]
+};
 </script>

@@ -12,7 +12,7 @@ npm install freel/vue-quiz
 ```
 <template>
   <vue-quiz
-    action="#"
+    @complete="' complete action '"
     :questions = "' json Object '"
     // CSS props
   />
@@ -29,25 +29,24 @@ export default {
 </script>
 ```
 
+## Params
+@complete - action starts when user click submit button. Returns 'answered' array
+
+questions - Array of questions with answers
+
 ## Questions
 Is array of JSON object with next structure:
 ```
 :questions = "'[
   {text:"Vue.JS is",
     answers:[
-      {text:"JS framework"},
+      {text:"JS framework", right:true},
       {text:"PHP framework"},
       {text:"Something from space"}
   ]},
 ...
 ]'"
 ```
-
-## Params
-action - On sunbmit action, default "#"
-
-questions - Array of questions with answers
-
 
 ## Props
 |Name            | Type | Default | Description

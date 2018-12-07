@@ -25,42 +25,26 @@
 
 <script>
 export default {
-  name: "Answer",
-  props: {
-    value: {
-      type: Array
-    },
-    answers: {
-      type: Array
-    },
-    question: {
-      type: Number
-    },
-    answerContainerClass: {
-      type: String
-    },
-    answerClass: {
-      type: String
-    },
-    answerControlClass: {
-      type: String
-    },
-    answerCheckboxClass: {
-      type: String
-    },
-    answerLabelClass: {
-      type: String
-    },
-  },
-  data (){
-    return{
-      checkedAnswers: [],
-    }
+  name: "QuizAnswer",
+  props: [
+    "value",
+    "answers",
+    "question",
+    "answerContainerClass",
+    "answerClass",
+    "answerControlClass",
+    "answerCheckboxClass",
+    "answerLabelClass"
+  ],
+  data() {
+    return {
+      checkedAnswers: []
+    };
   },
   watch: {
-    question: function () {
-      this.checkedAnswers = this.value != null ? this.value : []
+    question: function() {
+      this.checkedAnswers = this.value != null ? this.value : [];
     }
   }
-}
+};
 </script>
