@@ -9,6 +9,7 @@
       <quiz-answer
         slot="Answer"
         v-model="answered[item]"
+        @right="right"
         :answerContainerClass="answerContainerClass"
         :answerClass="answerClass"
         :answerControlClass="answerControlClass"
@@ -65,7 +66,7 @@ export default {
             answers: [
               { text: "JS framework", right: true },
               { text: "PHP framework" },
-              { text: "Something from space" }
+              { text: "Something from space", right: true }
             ]
           },
           {
@@ -73,7 +74,7 @@ export default {
             answers: [
               { text: "No" },
               { text: "Both" },
-              { text: " Yes", right: true }
+              { text: "Yes", right: true }
             ]
           },
           {
@@ -172,7 +173,8 @@ export default {
   data() {
     return {
       item: 0,
-      answered: []
+      answered: [], // all answers
+      right_answers: [] // right or false answers
     };
   },
   computed: {
@@ -198,9 +200,15 @@ export default {
     prevousItem: function() {
       return this.item > 0 ? this.item-- : void 0;
     },
+    right: function(val) {
+      this.right_answers[this.item] = val;
+    },
     formSubmit: function() {
       // TODO: return JSON values
-      this.$emit("complete", this.answered);
+      this.$emit("complete", {
+        answers: this.answered,
+        right_answers: this.right_answers
+      });
     }
   }
 };

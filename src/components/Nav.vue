@@ -1,26 +1,26 @@
 <template lang="html">
   <div class="quiz-nav">
     <input
-    type="button"
-    v-show="isPrevousShow"
-    :disabled="isPrevousDisabled"
-    @click="$emit('prevous')"
-    :class="[buttonClass, nextClass]"
-    :value="prevousValue">
+      type="button"
+      v-show="isPrevousShow"
+      :disabled="isPrevousDisabled"
+      @click="$emit('prevous')"
+      :class="[buttonClass, nextClass]"
+      :value="prevousValue">
     <input
-    type="button"
-    v-show="isSubmitShow"
-    :disabled="isSubmitDisabled"
-    @click="$emit('submit')"
-    :class="[buttonClass, submitClass]"
-    :value="submitValue">
+      type="button"
+      v-show="isNextShow"
+      :disabled="isNextDisabled"
+      @click="$emit('next')"
+      :class="[buttonClass, nextClass]"
+      :value="nextValue">
     <input
-    type="button"
-    v-show="isNextShow"
-    :disabled="isNextDisabled"
-    @click="$emit('next')"
-    :class="[buttonClass, nextClass]"
-    :value="nextValue">
+      type="button"
+      v-show="isSubmitShow"
+      :disabled="isSubmitDisabled"
+      @click="$emit('submit')"
+      :class="[buttonClass, submitClass]"
+      :value="submitValue">
   </div>
 </template>
 
@@ -56,7 +56,7 @@ export default {
       return this.nextShow || this.completed_question;
     },
     isNextDisabled: function() {
-      return this.page >= this.pages_count - 1;
+      return this.page >= this.pages_count - 1 || !this.completed_question;
     },
     isPrevousShow: function() {
       return this.prevousShow;

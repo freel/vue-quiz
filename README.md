@@ -30,7 +30,18 @@ export default {
 ```
 
 ## Params
-@complete - action starts when user click submit button. Returns 'answered' array
+@complete - action starts when user click submit button. Returns Object
+```
+Object {
+  answer: Array[ Array [ index: selected item index ] ],
+  right_answers: Array [ index: if selected items right then true, else false ]
+}
+e.g.:
+{
+  answers: [[0:1, 1:2],[0:0]],
+  right_answers: [0: true, 1: false]
+}
+```
 
 questions - Array of questions with answers
 

@@ -8,7 +8,7 @@
             <input
               type="checkbox"
               v-model="checkedAnswers"
-              v-on:change="$emit('input', checkedAnswers)"
+              v-on:change="changed"
               :value="index"
               :class="answerCheckboxClass"
               :id="'checkbox_' + index">
@@ -21,7 +21,6 @@
     </div>
   </div>
 </template>
-
 
 <script>
 export default {
@@ -44,6 +43,25 @@ export default {
   watch: {
     question: function() {
       this.checkedAnswers = this.value != null ? this.value : [];
+    }
+  },
+  computed: {
+    right: function() {
+      return this.answers
+        .map((item, i) => (item.right == true ? i : ""))
+        .filter(String);
+      // return this.answers.filter(function (item){
+      //   return item.right === true;
+      // })
+    }
+  },
+  methods: {
+    changed: function() {
+      this.$emit(
+        "right",
+        JSON.stringify(this.checkedAnswers) === JSON.stringify(this.right)
+      );
+      this.$emit("input", this.checkedAnswers);
     }
   }
 };

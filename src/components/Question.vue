@@ -9,7 +9,6 @@
   </keep-alive>
 </template>
 
-
 <script>
 export default {
   name: "QuizQuestion",
